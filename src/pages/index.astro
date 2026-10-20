@@ -1,0 +1,421 @@
+---
+import '../styles/global.css';
+import SiteHeader from '../components/SiteHeader.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+
+const bookingUrl = 'https://penzionrech.cz/online-rezervace/';
+const rooms = [
+  { name: 'Jednička', image: '/images/jednicka/jednicka-07.jpg', alternate: '/images/jednicka/jednicka-03.jpg', third: '/images/jednicka/jednicka-01.jpg', detail: '80 m² · Vlastní swim spa, finská sauna a kino', text: 'Soukromý tropický úkryt pro dva. Den v zahradě, večer ve wellness a u filmu.', href: '/jednicka/' },
+  { name: 'Desítka', image: '/images/desitka.jpg', alternate: '/images/rooms/desitka-alt.jpg', third: '/images/rooms/desitka-third.jpg', detail: '50 m² · Venkovní vířivka a finská sauna', text: 'Apartmá v zahradě s vlastním ochlazovacím jezírkem. Pro odpočinek, který máte celý pro sebe.', href: 'https://penzionrech.cz/project/wellness-desitka/' },
+  { name: 'Šestka', image: '/images/sestka.jpg', alternate: '/images/rooms/sestka-alt.jpg', third: '/images/rooms/sestka-third.jpg', detail: '80 m² · Vlastní vířivka a kinotelevize', text: 'Třípodlažní podkrovní apartmá. Pro dlouhé večery ve vířivce i film, na který máte konečně čas.', href: 'https://penzionrech.cz/project/podkrovni-wellness-apartma/' },
+  { name: 'Devítka', image: '/images/devitka.jpg', alternate: '/images/rooms/devitka-alt.jpeg', third: '/images/rooms/devitka-third.jpeg', detail: '50 m² · Vlastní vířivka a kinoplátno', text: 'Z postele výhled na jezírka a Blansko. Zbytek večera můžete strávit ve vířivce nebo u filmu.', href: 'https://penzionrech.cz/project/wellness-apartma-nad-jezirkem/' },
+  { name: 'Osmička', image: '/images/osmicka.jpg', alternate: '/images/rooms/osmicka-alt.jpeg', third: '/images/rooms/osmicka-third.jpeg', detail: '50 m² · Vířivka a finská sauna', text: 'Zahradní apartmá se zastřešenou terasou. Na výhled do zeleně si tu najdete čas v každém počasí.', href: 'https://penzionrech.cz/project/zahradni-wellness-apartma/' },
+  { name: 'Sedmička', image: '/images/rooms/sedmicka.jpeg', alternate: '/images/rooms/sedmicka-alt.jpeg', third: '/images/rooms/sedmicka-third.jpeg', detail: '40 m² · Vířivka a finská sauna', text: 'Apartmá s vlastní vyhlídkovou terasou. Pro chvíle v teple i posezení pod širým nebem.', href: 'https://penzionrech.cz/project/desitka/' },
+  { name: 'Dvoulůžkový s balkonem', image: '/images/rooms/balkon.jpeg', alternate: '/images/rooms/balkon-alt.jpeg', third: '/images/rooms/balkon-third.jpeg', detail: 'Balkon · Možnost přistýlky', text: 'Pohodlný dvoulůžkový pokoj s vlastním balkonem. Příjemné zázemí po výletu i pro klidný den v penzionu.', href: 'https://penzionrech.cz/project/dvouluzkovy-pokoj-superior-s-balkonem/' }
+];
+const reviews = [
+  { quote: '„Příjemné prostředí, krásná zahrada a chvíle opravdového klidu. Rádi se sem vrátíme.“', source: 'Host · Penzion Rech' },
+  { quote: '„S pobytem jsme byli velice spokojeni. Vše na úrovni — ubytování, wellness, jídlo i nápoje. Klidná lokalita ideální k odpočinku.“', source: 'Host · Mapy.com' },
+  { quote: '„Velmi pěkné prostředí, krásná zahrada a ochotný personál. Příjemná relaxace. Určitě nezůstane jen u jednoho pobytu.“', source: 'Host · Spa.cz' },
+  { quote: '„Krásný pokoj s vanou a balkonem, s výhledem na celé město. Jídlo úplně luxusní, dobroty v malých porcích.“', source: 'Host · Slevomat' },
+  { quote: '4,8 / 5 · 573 hodnocení hostů', source: 'Google · souhrn hodnocení' }
+];
+---
+<!doctype html>
+<html lang="cs">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Boutique penzion v Moravském krasu. Osobité pokoje, wellness v soukromí a zahrada s výhledem na Blansko." />
+    <title>Penzion u Rechů · Boutique penzion v Moravském krasu</title>
+  </head>
+  <body>
+    <SiteHeader />
+
+    <main>
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="hero-shade"></div>
+        <div class="hero-reveal" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
+        <div class="hero-inner">
+          <h1 id="hero-title">Místo, kde můžete<br /> konečně zpomalit.</h1>
+          <p>Boutique penzion v Moravském krasu. Osobité pokoje,<br class="desktop-only" /> wellness v soukromí a zahrada s výhledem na Blansko.</p>
+        </div>
+      </section>
+
+      <section class="intro" id="o-penzionu">
+        <p>Nad Blanskem, na dosah Moravského krasu, je místo, kde můžete na pár dní vypnout. Ráno u snídaně, odpoledne v zahradě, večer ve vlastním wellness. U Rechů máte čas být spolu.</p>
+      </section>
+      <script>
+        const intro = document.querySelector<HTMLElement>('#o-penzionu');
+        const introCopy = intro?.querySelector('p');
+        if (intro && introCopy) {
+          const original = introCopy.textContent ?? '';
+          const phrases = original.match(/\S+(?:\s+\S+)?\s*/gu);
+          if (phrases && phrases.join('') === original) {
+            const fragment = document.createDocumentFragment();
+            const words = phrases.map((phrase, index) => {
+              const span = document.createElement('span');
+              const start = 28 + (24 * index) / Math.max(phrases.length - 1, 1);
+              span.className = 'intro-phrase';
+              span.textContent = phrase;
+              span.style.setProperty('--reveal-start', `${start}%`);
+              span.style.setProperty('--reveal-end', `${start + 10}%`);
+              fragment.append(span);
+              return { span, start: start / 100 };
+            });
+            introCopy.replaceChildren(fragment);
+
+            const nativeTimeline = CSS.supports('view-timeline-name: --intro-text') &&
+              CSS.supports('animation-range: cover 28% cover 38%') &&
+              CSS.supports('color: color-mix(in srgb, #252923 58%, #e8e1d5)');
+            if (nativeTimeline) {
+              intro.classList.add('intro-reveal-native');
+            } else {
+              intro.classList.add('intro-reveal-fallback');
+              const motion = window.matchMedia('(prefers-reduced-motion: reduce)');
+              let frame = 0;
+              const update = () => {
+                frame = 0;
+                if (motion.matches) {
+                  words.forEach(({ span }) => span.style.removeProperty('color'));
+                  return;
+                }
+                const rect = intro.getBoundingClientRect();
+                const progress = Math.max(0, Math.min(1, (innerHeight - rect.top) / (innerHeight + rect.height)));
+                words.forEach(({ span, start }) => {
+                  const strength = .3 + .7 * Math.max(0, Math.min(1, (progress - start) / .1));
+                  const mix = (ink: number, sand: number) => Math.round(sand + (ink - sand) * strength);
+                  span.style.color = `rgb(${mix(37, 232)}, ${mix(41, 225)}, ${mix(35, 213)})`;
+                });
+              };
+              const schedule = () => { if (!frame) frame = requestAnimationFrame(update); };
+              window.addEventListener('scroll', schedule, { passive: true });
+              window.addEventListener('resize', schedule);
+              motion.addEventListener('change', schedule);
+              schedule();
+            }
+          }
+        }
+      </script>
+
+      <section class="rooms section-wrap" id="pokoje" aria-labelledby="rooms-title">
+        <div class="rooms-heading"><h2 id="rooms-title" data-reveal="text">Naše apartmány</h2></div>
+        <div class="rooms-content">
+          <div class="rooms-grid" id="rooms-grid" tabindex="0" aria-label="Posouvatelný výběr pokojů">
+            {rooms.map((room, index) => (
+              <a class="room-card" href={room.href} data-reveal="photo" style={`--reveal-delay:${Math.min(index, 2) * 75}ms`}>
+                <div class="room-photo" data-original={room.image} data-alternate={room.alternate} data-third={room.third}>
+                  <img class="room-photo-current" src={room.image} alt={room.name + ' — Penzion u Rechů'} loading="lazy" />
+                  <img class="room-photo-overlay" src={room.alternate} alt="" aria-hidden="true" loading="lazy" />
+                  <span class="room-photo-bars" aria-hidden="true"><span></span><span></span><span></span></span>
+                </div>
+                <h3>{room.name}</h3>
+                <p class="room-detail">{room.detail}</p>
+                <p>{room.text}</p>
+              </a>
+            ))}
+            <a class="room-card room-card-all" href="https://penzionrech.cz/wellness-apartmany/">
+              <span>Prohlédnout<br />všechny pokoje</span><span aria-hidden="true">→</span>
+            </a>
+          </div>
+          <div class="rooms-progress"><span id="rooms-progress-label">POSUŇTE A VYBERTE SI SVŮJ POKOJ</span><span class="progress-track" role="scrollbar" tabindex="0" aria-labelledby="rooms-progress-label" aria-controls="rooms-grid" aria-orientation="horizontal" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><span></span></span></div>
+          <a class="all-rooms" href="https://penzionrech.cz/wellness-apartmany/">Prohlédnout všechny pokoje <span aria-hidden="true">↗</span></a>
+        </div>
+      </section>
+      <script>
+        const roomStrip = document.querySelector<HTMLElement>('#rooms-grid');
+        const progressTrack = document.querySelector<HTMLElement>('#pokoje .progress-track');
+        if (roomStrip && progressTrack) {
+          const thumb = progressTrack.querySelector<HTMLElement>('span');
+          const updateProgress = () => {
+            const max = roomStrip.scrollWidth - roomStrip.clientWidth;
+            const progress = max > 0 ? roomStrip.scrollLeft / max : 0;
+            const width = Math.min(1, roomStrip.clientWidth / roomStrip.scrollWidth);
+            if (thumb) {
+              thumb.style.width = `${width * 100}%`;
+              thumb.style.transform = `translateX(${progress * (progressTrack.clientWidth - thumb.offsetWidth)}px)`;
+            }
+            progressTrack.setAttribute('aria-valuenow', String(Math.round(progress * 100)));
+          };
+          roomStrip.addEventListener('scroll', updateProgress, { passive: true });
+          new ResizeObserver(updateProgress).observe(roomStrip);
+          updateProgress();
+
+          roomStrip.addEventListener('wheel', event => {
+            if (!(event.target as Element).closest('.room-photo')) {
+              if (event.deltaX) event.preventDefault();
+              return;
+            }
+            const delta = Math.abs(event.deltaX) > Math.abs(event.deltaY) ? event.deltaX : event.deltaY;
+            const step = delta * (event.deltaMode === 1 ? 16 : event.deltaMode === 2 ? roomStrip.clientWidth : 1);
+            const max = roomStrip.scrollWidth - roomStrip.clientWidth;
+            const next = Math.max(0, Math.min(max, roomStrip.scrollLeft + step));
+            if (next !== roomStrip.scrollLeft) {
+              event.preventDefault();
+              roomStrip.scrollLeft = next;
+            }
+          }, { passive: false });
+
+          let middlePointerId: number | null = null;
+          let lastPointerX = 0;
+          roomStrip.addEventListener('pointerdown', event => {
+            if (event.button !== 1) return;
+            event.preventDefault();
+            middlePointerId = event.pointerId;
+            lastPointerX = event.clientX;
+            roomStrip.setPointerCapture(event.pointerId);
+          });
+          roomStrip.addEventListener('pointermove', event => {
+            if (event.pointerId !== middlePointerId) return;
+            roomStrip.scrollLeft += event.clientX - lastPointerX;
+            lastPointerX = event.clientX;
+          });
+          const endMiddleDrag = (event: PointerEvent) => {
+            if (event.pointerId !== middlePointerId) return;
+            middlePointerId = null;
+            if (roomStrip.hasPointerCapture(event.pointerId)) roomStrip.releasePointerCapture(event.pointerId);
+          };
+          roomStrip.addEventListener('pointerup', endMiddleDrag);
+          roomStrip.addEventListener('pointercancel', endMiddleDrag);
+          roomStrip.addEventListener('auxclick', event => {
+            if (event.button === 1) event.preventDefault();
+          });
+
+          const moveFromTrack = (clientX: number) => {
+            const rect = progressTrack.getBoundingClientRect();
+            const travel = rect.width - (thumb?.offsetWidth ?? 0);
+            const progress = travel ? Math.max(0, Math.min(1, (clientX - rect.left - (thumb?.offsetWidth ?? 0) / 2) / travel)) : 0;
+            roomStrip.scrollLeft = progress * (roomStrip.scrollWidth - roomStrip.clientWidth);
+          };
+          progressTrack.addEventListener('pointerdown', event => {
+            progressTrack.setPointerCapture(event.pointerId);
+            moveFromTrack(event.clientX);
+          });
+          progressTrack.addEventListener('pointermove', event => {
+            if (progressTrack.hasPointerCapture(event.pointerId)) moveFromTrack(event.clientX);
+          });
+          progressTrack.addEventListener('keydown', event => {
+            const step = roomStrip.querySelector<HTMLElement>('.room-card')?.offsetWidth ?? 320;
+            if (event.key === 'ArrowRight') roomStrip.scrollLeft += step;
+            else if (event.key === 'ArrowLeft') roomStrip.scrollLeft -= step;
+            else if (event.key === 'Home') roomStrip.scrollLeft = 0;
+            else if (event.key === 'End') roomStrip.scrollLeft = roomStrip.scrollWidth;
+            else return;
+            event.preventDefault();
+          });
+
+          const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
+          roomStrip.querySelectorAll<HTMLElement>('.room-photo').forEach(photo => {
+            const current = photo.querySelector<HTMLImageElement>('.room-photo-current');
+            const overlay = photo.querySelector<HTMLImageElement>('.room-photo-overlay');
+            if (!current || !overlay) return;
+            const photos = [photo.dataset.original!, photo.dataset.alternate!, photo.dataset.third!];
+            const bars = [...photo.querySelectorAll<HTMLElement>('.room-photo-bars > span')];
+            let currentIndex = 0;
+            let nextIndex = 0;
+            let hovered = false;
+            let animating = false;
+            let revealOnReturn = false;
+            let timer = 0;
+            let transitionToken = 0;
+            const fillBar = () => {
+              bars.forEach((bar, index) => {
+                bar.classList.remove('is-complete', 'is-filling');
+                if (index < currentIndex) bar.classList.add('is-complete');
+                if (index === currentIndex) {
+                  void bar.offsetWidth;
+                  bar.classList.add('is-filling');
+                }
+              });
+              timer = window.setTimeout(() => wipeTo((currentIndex + 1) % photos.length, 'up'), 3000);
+            };
+            const wipeTo = async (index: number, direction: 'up' | 'down') => {
+              if (animating || reducedMotion.matches) return;
+              const token = ++transitionToken;
+              nextIndex = index;
+              if (overlay.src !== new URL(photos[index], document.baseURI).href) overlay.src = photos[index];
+              try {
+                if (overlay.decode) await overlay.decode();
+                else if (!overlay.complete) await new Promise<void>((resolve, reject) => {
+                  overlay.onload = () => resolve();
+                  overlay.onerror = () => reject();
+                });
+              } catch {
+                return;
+              }
+              if (token !== transitionToken || (direction === 'up' ? !hovered : hovered)) return;
+              animating = true;
+              overlay.classList.add(direction === 'up' ? 'is-wiping-up' : 'is-wiping-down');
+            };
+            overlay.addEventListener('animationend', event => {
+              if (event.animationName !== 'room-photo-wipe-up' && event.animationName !== 'room-photo-wipe-down') return;
+              current.src = overlay.src;
+              currentIndex = nextIndex;
+              overlay.classList.remove('is-wiping-up', 'is-wiping-down');
+              animating = false;
+              if (hovered && revealOnReturn && currentIndex === 0) {
+                revealOnReturn = false;
+                requestAnimationFrame(() => wipeTo(1, 'up'));
+              } else if (hovered) fillBar();
+              else if (currentIndex !== 0) requestAnimationFrame(() => wipeTo(0, 'down'));
+            });
+            photo.addEventListener('pointerenter', () => {
+              if (reducedMotion.matches) return;
+              hovered = true;
+              clearTimeout(timer);
+              photo.classList.add('is-hovering');
+              [photos[1], photos[2]].forEach(src => {
+                const preload = new Image();
+                preload.src = src;
+              });
+              if (animating) revealOnReturn = true;
+              else if (currentIndex === 0) wipeTo(1, 'up');
+              else fillBar();
+            });
+            photo.addEventListener('pointerleave', () => {
+              hovered = false;
+              transitionToken++;
+              revealOnReturn = false;
+              clearTimeout(timer);
+              photo.classList.remove('is-hovering');
+              bars.forEach(bar => bar.classList.remove('is-filling', 'is-complete'));
+              if (!animating && currentIndex !== 0) wipeTo(0, 'down');
+            });
+          });
+        }
+      </script>
+
+      <section class="food section-wrap" id="jidlo">
+        <h2 data-reveal="text">O dobré jídlo<br />je postaráno.</h2>
+        <div>
+          <p data-reveal="text" style="--reveal-delay:85ms">Začněte den snídaní. Odpoledne i večer si vyberte z teplého a studeného bufetu, sýrů nebo dezertů. Vše je součástí pobytu — stačí přijít a dát si, na co máte chuť.</p>
+          <p class="food-includes" data-reveal="text" style="--reveal-delay:160ms">Snídaně v ceně pobytu<br />Odpolední a večerní bufet all inclusive light</p>
+        </div>
+      </section>
+
+      <section class="wellness" id="wellness">
+        <div class="wellness-inner section-wrap">
+          <div class="wellness-main-image" data-reveal="photo"><img src="/images/wellness.jpg" alt="Soukromé wellness s vířivkou v Penzionu u Rechů" loading="lazy" /><div class="image-tag">VÁŠ VLASTNÍ ČAS<br /><small>Rezervace jen pro vás</small></div></div>
+          <div class="wellness-copy">
+            <h2 data-reveal="text" style="--reveal-delay:75ms">Teplo. Ticho.<br />Čas ve dvou.</h2>
+            <p data-reveal="text" style="--reveal-delay:145ms">Sauna, vířivka a čas, který patří jen vám. Vyberte si apartmá s vlastním wellness, nebo si dopřejte privátní relaxaci bez dalších hostů.</p>
+            <a class="outline-button" href="https://penzionrech.cz/wellness/">VYBRAT WELLNESS <span aria-hidden="true">↗</span></a>
+          </div>
+          <div class="wellness-detail" data-reveal="photo"><img src="/images/wellness-detail.jpg" alt="Privátní wellness v Penzionu u Rechů" loading="lazy" /><div class="image-tag">VÁŠ SOUKROMÝ RELAX<br /><small>Sauna · vířivka pouze vám</small></div></div>
+        </div>
+      </section>
+
+      <script>
+        const wellnessSection = document.querySelector<HTMLElement>('.wellness');
+        const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+        if (wellnessSection && !reducedMotion.matches) {
+          let frame = 0;
+          const updateWellnessParallax = () => {
+            frame = 0;
+            const bounds = wellnessSection.getBoundingClientRect();
+            const progress = Math.max(0, Math.min(1, (window.innerHeight - bounds.top) / (window.innerHeight + bounds.height)));
+            const mobile = window.matchMedia('(max-width: 700px)').matches;
+            wellnessSection.style.setProperty('--wellness-main-shift', `${-progress * (mobile ? 42 : 90)}px`);
+            wellnessSection.style.setProperty('--wellness-detail-shift', `${-progress * (mobile ? 70 : 145)}px`);
+          };
+          const scheduleWellnessParallax = () => {
+            if (!frame) frame = window.requestAnimationFrame(updateWellnessParallax);
+          };
+
+          window.addEventListener('scroll', scheduleWellnessParallax, { passive: true });
+          window.addEventListener('resize', scheduleWellnessParallax);
+          updateWellnessParallax();
+        }
+      </script>
+
+      <section class="reviews" aria-labelledby="reviews-title">
+        <div class="section-wrap">
+          <h2 id="reviews-title" data-reveal="text">Jak se u nás líbilo hostům</h2>
+          <p class="reviews-subtitle" data-reveal="text" style="--reveal-delay:75ms">Zkušenosti těch, kteří u Rechů už byli.</p>
+          <div class="review-grid">
+            {reviews.map((review, index) => (
+              <article class="review-card" data-reveal="block" style={`--reveal-delay:${index * 70}ms`}>
+                <span class="review-avatar" aria-hidden="true"></span>
+                <span class="stars" aria-label="5 hvězdiček">★★★★★</span>
+                <p>{review.quote}</p>
+                <small>{review.source}</small>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section class="short-cta">
+        <div class="section-wrap">
+          <h2 data-reveal="text">Dopřejte si pár dní volna.</h2>
+          <a class="button" href={bookingUrl}>Ověřit dostupnost <span aria-hidden="true">↗</span></a>
+        </div>
+      </section>
+
+      <section class="outdoors" id="okoli">
+        <div class="outdoors-shade"></div>
+        <div class="section-wrap outdoors-inner">
+          <h2 data-reveal="text">Výhled na Blansko.<br />Prostor pro sebe.</h2>
+          <p data-reveal="text" style="--reveal-delay:90ms">Vezměte si kávu do zahrady a najděte si své oblíbené zákoutí. Až dostanete chuť vyrazit dál, objevte Moravský kras.</p>
+          <a class="light-button" href="https://penzionrech.cz/aktivity/">OBJEVIT OKOLÍ <span aria-hidden="true">↗</span></a>
+        </div>
+      </section>
+
+      <section class="gift">
+        <div class="section-wrap gift-inner">
+          <h2 data-reveal="text">Darujte chvíle<br />jen pro sebe.</h2>
+          <div><p data-reveal="text" style="--reveal-delay:90ms">Pro rodiče, partnera nebo někoho, komu chcete poděkovat. Darujte odpočinek u Rechů.</p><a class="button" href="https://penzionrech.cz/darkovy-poukaz/">Koupit dárkový poukaz <span aria-hidden="true">↗</span></a></div>
+        </div>
+      </section>
+    </main>
+
+    <SiteFooter />
+    <script is:inline>
+      const revealTargets = [...document.querySelectorAll('[data-reveal]')];
+      const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+      if (revealTargets.length && !reducedMotion.matches) {
+        const isVisible = target => {
+          const rect = target.getBoundingClientRect();
+          return rect.top < innerHeight * .9 && rect.bottom > 0 && rect.left < innerWidth && rect.right > 0;
+        };
+        const revealVisible = () => {
+          revealTargets.forEach(target => {
+            if (!target.classList.contains('is-revealed') && isVisible(target)) target.classList.add('is-revealed');
+          });
+        };
+        const pending = revealTargets.filter(target => !isVisible(target));
+
+        document.documentElement.classList.add('reveals-ready');
+        // Commit the initial hidden state before enabling transitions.
+        void document.documentElement.offsetWidth;
+        document.documentElement.classList.add('reveals-armed');
+        revealVisible();
+
+        let frame = 0;
+        const schedule = () => {
+          if (frame) return;
+          frame = requestAnimationFrame(() => {
+            frame = 0;
+            revealVisible();
+          });
+        };
+        window.addEventListener('scroll', schedule, { passive: true });
+        window.addEventListener('resize', schedule);
+        document.querySelector('.rooms-grid')?.addEventListener('scroll', schedule, { passive: true });
+
+        if ('IntersectionObserver' in window) {
+          const revealObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+              if (!entry.isIntersecting) return;
+              entry.target.classList.add('is-revealed');
+              observer.unobserve(entry.target);
+            });
+          }, { rootMargin: '0px 0px -10% 0px', threshold: 0.08 });
+          pending.forEach(target => revealObserver.observe(target));
+        }
+      }
+    </script>
+
+  </body>
+</html>

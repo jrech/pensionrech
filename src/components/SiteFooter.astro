@@ -1,0 +1,14 @@
+---
+interface Props { page?: 'home' | 'room' }
+const { page = 'home' } = Astro.props;
+const home = page === 'home';
+const bookingUrl = 'https://penzionrech.cz/online-rezervace/';
+const homeLink = (hash: string) => home ? hash : `/${hash}`;
+---
+<footer class="footer" id="kontakt"><div class="section-wrap footer-inner">
+  <div class="footer-intro"><a class="footer-brand" href={home ? '#top' : '/'}>Rech.</a><p>Vyberte termín.<br />My se na vás připravíme.</p><a class="light-button" href={home ? bookingUrl : '#rezervace'}>OVĚŘIT DOSTUPNOST <span aria-hidden="true">↗</span></a></div>
+  <div><h3>Kontakt</h3><a href="tel:+420777132343">+420 777 13 23 43</a><a href="mailto:recepce@penzionrech.cz">recepce@penzionrech.cz</a><p>Hořická 2024/42<br />678 01 Blansko</p></div>
+  <div><h3>Pro hosty</h3><a href={homeLink('#pokoje')}>Pokoje a apartmány</a><a href={homeLink('#wellness')}>Wellness</a><a href="https://penzionrech.cz/darkovy-poukaz/">Dárkové poukazy</a><a href={home ? bookingUrl : '#rezervace'}>Rezervace</a></div>
+  <div><h3>Informace</h3><a href={homeLink('#o-penzionu')}>O penzionu</a><a href={homeLink('#okoli')}>Aktivity v okolí</a><a href="#kontakt">Kontakt</a><a href="https://penzionrech.cz/ochrana-osobnich-udaju/">Ochrana osobních údajů</a></div>
+  <div class="footer-bottom"><span>© 2026 Boutique penzion Rech</span><span><a href="https://penzionrech.cz/ochrana-osobnich-udaju/">Ochrana soukromí</a> · <a href="https://penzionrech.cz/ubytovaci-rad/">Podmínky pobytu</a></span></div>
+</div></footer>

@@ -1,0 +1,61 @@
+---
+interface Props { page?: 'home' | 'room' }
+const { page = 'home' } = Astro.props;
+const home = page === 'home';
+const bookingUrl = 'https://penzionrech.cz/online-rezervace/';
+const homeLink = (hash: string) => home ? hash : `/${hash}`;
+---
+<header class="site-header" id="top">
+  <button class="menu-button" type="button" aria-label="Otevřít menu" aria-expanded="false" aria-controls="site-menu"><span class="menu-icon" aria-hidden="true"><span></span><span></span><span></span></span><span class="menu-label">MENU</span></button>
+  <a class="brand" href={home ? '#top' : '/'}>Penzion u Rechů</a>
+  <a class="header-book" href={home ? bookingUrl : '#rezervace'}>{home ? 'OVĚŘIT DOSTUPNOST' : 'REZERVOVAT'} <span aria-hidden="true">↗</span></a>
+  <nav class="site-menu" id="site-menu" aria-label="Hlavní navigace" aria-hidden="true" inert><div class="site-menu-inner">
+    <div class="site-menu-column"><h2>Pobyt</h2><a href={homeLink('#pokoje')}>Pokoje a apartmány</a><a href="https://penzionrech.cz/pobytove-balicky/">Pobytové balíčky</a><a href="https://penzionrech.cz/cenik/">Ceník</a><a href="https://penzionrech.cz/fotogalerie/">Galerie</a><a href={home ? bookingUrl : '#rezervace'}>Rezervace</a></div>
+    <div class="site-menu-column"><h2>Wellness</h2><a href={homeLink('#wellness')}>Soukromé wellness</a><a href={homeLink('#pokoje')}>Apartmány s wellness</a><a href="https://penzionrech.cz/mini-lazne/">Masáže</a></div>
+    <div class="site-menu-column"><h2>O nás</h2><a href={home ? '#jidlo' : '#stravovani'}>All inclusive light</a><a href={homeLink('#okoli')}>Zahrada a okolí</a><a href="https://penzionrech.cz/fotogalerie/">Fotogalerie</a></div>
+    <div class="site-menu-column"><h2>Pro hosty</h2><a href="https://penzionrech.cz/darkovy-poukaz/">Dárkové poukazy</a><a href={home ? 'https://penzionrech.cz/informace/' : '#informace'}>Informace k pobytu</a><a href="#kontakt">Kontakt</a></div>
+    <div class="site-menu-column site-menu-contact"><h2>Napište nám</h2><a href="tel:+420777132343">+420 777 13 23 43</a><a href="mailto:recepce@penzionrech.cz">recepce@penzionrech.cz</a><span>Hořická 2024/42, Blansko</span></div>
+  </div></nav>
+</header>
+<script>
+  const button = document.querySelector<HTMLButtonElement>('.menu-button');
+  const menu = document.querySelector<HTMLElement>('.site-menu');
+  if (button && menu) {
+    const header = document.querySelector<HTMLElement>('.site-header');
+    const label = button.querySelector<HTMLElement>('.menu-label');
+    let pageScrollY = 0;
+    menu.addEventListener('transitionend', event => {
+      if (event.target === menu && event.propertyName === 'clip-path' && button.getAttribute('aria-expanded') === 'false') {
+        header?.classList.remove('menu-closing');
+        if (label) label.textContent = 'MENU';
+      }
+    });
+    const setOpen = (open: boolean) => {
+      if (open) {
+        pageScrollY = window.scrollY;
+        document.body.style.setProperty('--page-scroll-lock-top', `${-pageScrollY}px`);
+      } else {
+        document.body.style.removeProperty('--page-scroll-lock-top');
+      }
+      button.setAttribute('aria-expanded', String(open));
+      button.setAttribute('aria-label', open ? 'Zavřít menu' : 'Otevřít menu');
+      if (open && label) label.textContent = 'ZAVŘÍT';
+      menu.setAttribute('aria-hidden', String(!open));
+      menu.inert = !open;
+      header?.classList.toggle('menu-open', open);
+      header?.classList.toggle('menu-closing', !open && !window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+      if (!open && window.matchMedia('(prefers-reduced-motion: reduce)').matches && label) label.textContent = 'MENU';
+      document.documentElement.classList.toggle('menu-active', open);
+      document.body.classList.toggle('menu-active', open);
+      if (!open) window.scrollTo(0, pageScrollY);
+    };
+    button.addEventListener('click', () => setOpen(button.getAttribute('aria-expanded') !== 'true'));
+    menu.querySelectorAll('a').forEach(link => link.addEventListener('click', () => setOpen(false)));
+    document.addEventListener('keydown', event => {
+      if (event.key === 'Escape' && button.getAttribute('aria-expanded') === 'true') { setOpen(false); button.focus(); }
+    });
+    document.addEventListener('click', event => {
+      if (button.getAttribute('aria-expanded') === 'true' && !menu.contains(event.target as Node) && !button.contains(event.target as Node)) setOpen(false);
+    });
+  }
+</script>

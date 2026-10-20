@@ -1,0 +1,96 @@
+---
+import '../styles/global.css';
+import '../styles/jednicka.css';
+import SiteHeader from '../components/SiteHeader.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+
+const bookingUrl = 'https://penzionrech.cz/online-rezervace/';
+const gallery = [
+  { src: '/images/jednicka/jednicka-07.jpg', alt: 'Jednička: soukromé swim spa v tropické zahradě za dne' },
+  { src: '/images/jednicka/jednicka-03.jpg', alt: 'Osvětlené swim spa v Jedničce večer' },
+  { src: '/images/jednicka/jednicka-01.jpg', alt: 'Pohled na soukromou zahradu a swim spa po setmění' },
+  { src: '/images/jednicka/jednicka-02.jpg', alt: 'Swim spa a terasa Jedničky v noci' },
+  { src: '/images/jednicka/jednicka-04.jpg', alt: 'Detail venkovního wellness apartmá Jednička' },
+  { src: '/images/jednicka/jednicka-05.jpg', alt: 'Zahrada apartmá Jednička' },
+  { src: '/images/jednicka/jednicka-06.jpg', alt: 'Další pohled na soukromé wellness Jedničky' },
+  { src: '/images/jednicka/jednicka-08.png', alt: 'Venkovní prostor apartmá Jednička' },
+];
+---
+<!doctype html>
+<html lang="cs">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Jednička: wellness apartmá pro dva v Blansku. Soukromé venkovní swim spa, finská sauna a kino. Od 7 990 Kč za noc se stravováním." />
+    <meta property="og:image" content="/images/jednicka/jednicka-07.jpg" />
+    <title>Jednička · Soukromé wellness apartmá | Penzion u Rechů</title>
+  </head>
+  <body class="room-page">
+    <SiteHeader page="room" />
+
+    <main>
+      <section class="room-opening section-wrap" aria-labelledby="room-title">
+        <nav class="breadcrumbs" aria-label="Drobečková navigace"><a href="/#pokoje">Pokoje a apartmány</a><span aria-hidden="true">/</span><span>Jednička</span></nav>
+        <div class="room-heading"><div><h1 id="room-title">Jednička</h1><p>Váš soukromý tropický úkryt.</p></div><div class="room-heading-price"><strong>od 7 990 Kč / noc</strong><small>Pro dvě osoby · all inclusive light v ceně</small></div></div>
+        <div class="room-gallery" aria-label="Fotografie apartmá Jednička">
+          {gallery.slice(0, 3).map((photo, index) => <button class={`gallery-tile gallery-tile-${index + 1}`} type="button" data-gallery-index={index} aria-label={`Otevřít fotografii ${index + 1} z 8`}><img src={photo.src} alt={photo.alt} loading={index ? 'lazy' : 'eager'} />{index === 2 && <span class="gallery-all">▧&nbsp; Zobrazit 8 fotografií</span>}</button>)}
+        </div>
+        <ul class="room-facts" aria-label="Hlavní přednosti"><li><span aria-hidden="true">⛶</span> 80 m² prostoru</li><li><span aria-hidden="true">♧</span> Pobyt pro dva</li><li><span aria-hidden="true">≋</span> Vlastní swim spa</li><li><span aria-hidden="true">♨</span> Finská sauna</li><li><span aria-hidden="true">▣</span> Kino 4 m</li></ul>
+      </section>
+
+      <section class="room-story section-wrap" aria-labelledby="story-title"><div class="room-story-copy">
+        <h2 id="story-title" data-reveal="text">Malý tropický ráj.<br />Jen pro vás dva.</h2>
+        <p class="story-lead" data-reveal="text">Palmy, voda a vlastní kousek klidu. Jednička spojuje 80 m² prostoru se soukromým venkovním wellness. Zaplavte si proti proudu, prohřejte se v sauně a večer si pusťte film na velkém plátně.</p>
+        <div class="story-feature" data-reveal="text"><h3>Swim spa jen pro vás</h3><p>Vířivka a bazén s protiproudem v jednom. Venkovní wellness, které patří k vašemu apartmá.</p></div>
+        <div class="story-feature" data-reveal="text"><h3>Teplo finské sauny</h3><p>Po koupání si dopřejte další chvíli odpočinku ve vlastní finské sauně.</p></div>
+        <div class="story-feature" data-reveal="text"><h3>Večer ve vlastním kině</h3><p>Čtyřmetrové plátno promění obyčejný filmový večer v zážitek.</p></div>
+      </div><aside class="booking-card" id="rezervace" aria-labelledby="booking-title">
+        <h2 id="booking-title">Udělejte si čas na Jedničku.</h2><p class="booking-price">od 7 990 Kč</p><p>za noc pro dvě osoby</p><small>Snídaně a all inclusive light v ceně.</small>
+        <form id="booking-form" action={bookingUrl} method="get"><input type="hidden" name="room" value="jednicka" /><div class="date-fields"><label>Příjezd<input id="arrival" name="arrival" type="date" required /></label><label>Odjezd<input id="departure" name="departure" type="date" required /></label></div><label class="guest-field">Hosté<select name="guests" aria-label="Počet dospělých"><option value="2">2 dospělí</option><option value="1">1 dospělý</option></select></label><button class="button booking-submit" type="submit">Ověřit dostupnost <span aria-hidden="true">↗</span></button></form>
+        <small>Přesnou cenu zjistíte po výběru termínu.</small><a class="booking-gift" href="https://penzionrech.cz/darkovy-poukaz/">Darovat pobyt v Jedničce</a><small>Poradíme vám: <a href="tel:+420777132343">+420 777 13 23 43</a></small>
+      </aside></section>
+
+      <section class="room-comfort" aria-labelledby="comfort-title"><div class="room-comfort-inner section-wrap"><div class="comfort-photo" data-reveal="photo"><img src="/images/jednicka/jednicka-02.jpg" alt="Osvětlené soukromé swim spa Jedničky za soumraku" loading="lazy" /></div><div class="comfort-copy"><h2 id="comfort-title" data-reveal="text">Pro dlouhé večery.<br />A pomalá rána.</h2><p data-reveal="text">Po wellness se natáhněte do manželské postele. Ráno si dopřejte snídani a naplánujte den podle sebe.</p><ul><li>▤&nbsp; Manželská postel 180 × 200 cm</li><li>⌁&nbsp; Bezdrátový internet</li><li>≋&nbsp; Fén na vlasy</li></ul></div></div></section>
+
+      <section class="room-food" id="stravovani"><div class="section-wrap"><h2 data-reveal="text">O dobré jídlo je postaráno.</h2><div class="food-columns"><div data-reveal="text"><h3>Snídaně</h3><small>8:00–10:00</small><p>Začněte den v klidu. Snídaně je součástí vašeho pobytu.</p></div><div data-reveal="text"><h3>All inclusive light</h3><small>15:00–20:00</small><p>Odpolední i večerní bufet s teplou a studenou kuchyní, dezerty a vybranými nápoji.</p></div></div><a href="https://penzionrech.cz/all-inclusive-light/">Co všechno zahrnuje all inclusive light <span aria-hidden="true">↗</span></a></div></section>
+
+      <section class="room-info section-wrap" id="informace"><div><h2 data-reveal="text">Ať víte,<br />na co se těšit.</h2><dl><dt>Příjezd</dt><dd>od 15:00</dd><dt>Odjezd</dt><dd>do 11:00</dd><dt>Domácí mazlíčci</dt><dd>Pobyt s mazlíčky není možný.</dd></dl></div><div><h3>Ještě vás může zajímat</h3><div class="faq-item"><h4>Je wellness soukromé?</h4><p>Ano. Venkovní swim spa i finská sauna patří k apartmá Jednička a jsou určené pro váš pobyt.</p></div><div class="faq-item"><h4>Co znamená cena „od“?</h4><p>Jde o orientační cenu za noc pro dvě osoby včetně stravování. Přesnou cenu pro vybraný termín ukáže rezervační systém.</p></div><div class="faq-item"><h4>Jaké jsou podmínky rezervace?</h4><p>Záloha a storno se řídí podmínkami konkrétní rezervace. Před potvrzením si je prosím projděte.</p></div><a href="https://penzionrech.cz/ubytovaci-rad/">Podmínky pobytu a storno <span aria-hidden="true">↗</span></a></div></section>
+
+      <section class="room-more section-wrap"><h2 data-reveal="text">Každé apartmá má svůj příběh.</h2><div class="room-more-grid"><a href="https://penzionrech.cz/project/wellness-desitka/" data-reveal="photo"><div><img src="/images/desitka.jpg" alt="Apartmá Desítka se soukromým wellness" loading="lazy" /></div><h3>Desítka</h3><p>50 m² · Vířivka, finská sauna a ochlazovací jezírko</p></a><a href="https://penzionrech.cz/project/wellness-apartma-nad-jezirkem/" data-reveal="photo"><div><img src="/images/devitka.jpg" alt="Apartmá Devítka s vířivkou" loading="lazy" /></div><h3>Devítka</h3><p>50 m² · Vlastní vířivka a kinoplátno</p></a></div></section>
+    </main>
+    <SiteFooter page="room" />
+    <div class="mobile-booking"><span>od 7 990 Kč <small>/ noc</small></span><a href="#rezervace">Vybrat termín <span aria-hidden="true">↗</span></a></div>
+    <dialog class="gallery-dialog" id="gallery-dialog" aria-label="Galerie apartmá Jednička"><button class="gallery-close" type="button" aria-label="Zavřít galerii">×</button><button class="gallery-prev" type="button" aria-label="Předchozí fotografie">‹</button><figure><img src="/images/jednicka/jednicka-07.jpg" alt="Jednička: soukromé swim spa v tropické zahradě za dne" /><figcaption><span class="gallery-caption"></span><span class="gallery-count"></span></figcaption></figure><button class="gallery-next" type="button" aria-label="Další fotografie">›</button></dialog>
+    <script define:vars={{ gallery }} is:inline>
+      const arrival = document.querySelector('#arrival');
+      const departure = document.querySelector('#departure');
+      const today = new Date(); today.setMinutes(today.getMinutes() - today.getTimezoneOffset());
+      arrival.min = today.toISOString().slice(0, 10); departure.min = arrival.min;
+      arrival.addEventListener('change', () => { const next = new Date(`${arrival.value}T12:00:00`); next.setDate(next.getDate() + 1); departure.min = next.toISOString().slice(0, 10); if (departure.value && departure.value < departure.min) departure.value = ''; });
+      document.querySelector('#booking-form').addEventListener('submit', e => { if (departure.value <= arrival.value) { e.preventDefault(); departure.setCustomValidity('Odjezd musí být po příjezdu.'); departure.reportValidity(); } });
+      departure.addEventListener('change', () => departure.setCustomValidity(''));
+      const dialog = document.querySelector('#gallery-dialog');
+      const dialogImage = dialog.querySelector('img');
+      let currentIndex = 0;
+      let galleryTrigger = null;
+      const showPhoto = index => { currentIndex = (index + gallery.length) % gallery.length; dialogImage.src = gallery[currentIndex].src; dialogImage.alt = gallery[currentIndex].alt; dialog.querySelector('.gallery-caption').textContent = gallery[currentIndex].alt; dialog.querySelector('.gallery-count').textContent = `${currentIndex + 1} / ${gallery.length}`; };
+      document.querySelectorAll('[data-gallery-index]').forEach(button => button.addEventListener('click', () => { galleryTrigger = button; showPhoto(Number(button.dataset.galleryIndex)); dialog.showModal(); }));
+      dialog.querySelector('.gallery-close').addEventListener('click', () => dialog.close());
+      dialog.querySelector('.gallery-prev').addEventListener('click', () => showPhoto(currentIndex - 1));
+      dialog.querySelector('.gallery-next').addEventListener('click', () => showPhoto(currentIndex + 1));
+      dialog.addEventListener('click', e => { if (e.target === dialog) dialog.close(); });
+      dialog.addEventListener('close', () => galleryTrigger?.focus());
+      dialog.addEventListener('keydown', e => { if (e.key === 'ArrowLeft') showPhoto(currentIndex - 1); if (e.key === 'ArrowRight') showPhoto(currentIndex + 1); });
+      const revealTargets = [...document.querySelectorAll('[data-reveal]')];
+      if (revealTargets.length && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        const visible = target => { const r = target.getBoundingClientRect(); return r.top < innerHeight * .9 && r.bottom > 0; };
+        document.documentElement.classList.add('reveals-ready');
+        void document.documentElement.offsetWidth;
+        document.documentElement.classList.add('reveals-armed');
+        revealTargets.forEach(target => { if (visible(target)) target.classList.add('is-revealed'); });
+        const observer = new IntersectionObserver(entries => entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('is-revealed'); observer.unobserve(entry.target); } }), { rootMargin: '0px 0px -10% 0px', threshold: .08 });
+        revealTargets.filter(target => !target.classList.contains('is-revealed')).forEach(target => observer.observe(target));
+      }
+    </script>
+  </body>
+</html>
