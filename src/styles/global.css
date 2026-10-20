@@ -41,7 +41,8 @@ h1,h2{font-weight:400;letter-spacing:-.025em}
 .menu-icon span:last-child{transform:translateY(5px)}
 .site-menu{position:fixed;inset:0 0 auto;width:auto;height:40vh;height:40dvh;min-height:0;background:#e9e3d9;color:var(--ink);box-shadow:0 28px 60px #151c1850;visibility:hidden;pointer-events:none;clip-path:inset(0 0 100% 0);transition:clip-path .72s cubic-bezier(.76,0,.24,1),visibility 0s linear .72s}
 .site-header.menu-open .site-menu{visibility:visible;pointer-events:auto;clip-path:inset(0 0 0 0);transition:clip-path .82s cubic-bezier(.22,1,.36,1),visibility 0s}
-.mobile-menu-content{display:none}`r`n.site-menu-inner{height:100%;max-width:1440px;margin:auto;padding:135px 48px 36px;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));column-gap:40px;overflow-y:auto}
+.mobile-menu-content{display:none}
+.site-menu-inner{height:100%;max-width:1440px;margin:auto;padding:135px 48px 36px;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));column-gap:40px;overflow-y:auto}
 .site-menu-column{display:flex;flex-direction:column;align-items:flex-start;gap:14px}
 .site-menu-column h2{font-size:21px;line-height:1.2;font-weight:500;letter-spacing:-.03em;margin-bottom:2px}
 .site-menu-column a,.site-menu-column>span{font-size:14px;line-height:1.3;white-space:nowrap}
