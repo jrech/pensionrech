@@ -41,7 +41,7 @@ h1,h2{font-weight:400;letter-spacing:-.025em}
 .menu-icon span:last-child{transform:translateY(5px)}
 .site-menu{position:fixed;inset:0 0 auto;width:auto;height:40vh;height:40dvh;min-height:0;background:#e9e3d9;color:var(--ink);box-shadow:0 28px 60px #151c1850;visibility:hidden;pointer-events:none;clip-path:inset(0 0 100% 0);transition:clip-path .72s cubic-bezier(.76,0,.24,1),visibility 0s linear .72s}
 .site-header.menu-open .site-menu{visibility:visible;pointer-events:auto;clip-path:inset(0 0 0 0);transition:clip-path .82s cubic-bezier(.22,1,.36,1),visibility 0s}
-.site-menu-inner{height:100%;max-width:1440px;margin:auto;padding:135px 48px 36px;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));column-gap:40px;overflow-y:auto}
+.mobile-menu-content{display:none}`r`n.site-menu-inner{height:100%;max-width:1440px;margin:auto;padding:135px 48px 36px;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));column-gap:40px;overflow-y:auto}
 .site-menu-column{display:flex;flex-direction:column;align-items:flex-start;gap:14px}
 .site-menu-column h2{font-size:21px;line-height:1.2;font-weight:500;letter-spacing:-.03em;margin-bottom:2px}
 .site-menu-column a,.site-menu-column>span{font-size:14px;line-height:1.3;white-space:nowrap}
@@ -225,11 +225,22 @@ h1,h2{font-weight:400;letter-spacing:-.025em}
 @media(max-width:700px){
  :root{--section-space:clamp(68px,18vw,80px)}
  .section-wrap{padding-inline:24px}
- .site-header{--header-inset:24px;position:absolute;height:76px;padding:16px 24px;align-items:center;justify-content:center}
- .menu-button{left:24px;top:16px;min-width:auto;width:44px;height:44px;padding:12px;background:var(--ivory)}
- .menu-label,.header-book{display:none}
+ .site-header{--header-inset:20px;position:absolute;height:76px;padding:16px 20px;align-items:center;justify-content:center;z-index:20}
+ .menu-button{left:20px;top:16px;min-width:auto;width:44px;height:44px;padding:12px;background:transparent;z-index:2}
+ .menu-label{display:none}
+ .header-book{display:none;right:20px;top:20px;min-width:0;padding:10px 12px;font-size:9px;letter-spacing:.12em;z-index:2}
+ .site-header.menu-open .header-book{display:block}
  .brand{font-size:17px;line-height:44px}
- .site-menu-inner{padding:92px 24px 30px;grid-template-columns:1fr;gap:32px}
+ .site-menu{inset:0;height:100dvh;max-height:none;min-height:100dvh;box-shadow:none}
+ .site-menu-inner{height:100%;padding:106px 22px 32px;display:block;overflow-y:auto}
+ .site-menu-column{display:none}
+ .mobile-menu-content{display:block}
+ .mobile-menu-groups{display:flex;flex-direction:column}
+ .mobile-menu-groups a{min-height:54px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #c9c2b5;font-size:20px;line-height:1.2;letter-spacing:-.025em}
+ .mobile-menu-groups a span{width:7px;height:7px;border-right:1px solid currentColor;border-bottom:1px solid currentColor;transform:rotate(45deg) translateY(-2px)}
+ .mobile-menu-utility{display:flex;flex-direction:column;align-items:flex-start;gap:0;padding-top:20px}
+ .mobile-menu-utility a,.mobile-menu-contact a{font-size:12px;line-height:1.4;padding:7px 0}
+ .mobile-menu-contact{display:flex;flex-direction:column;align-items:flex-start;margin-top:16px}
  .hero{height:100vh;background-position:53% center}
  .hero-inner{left:24px;right:24px;bottom:42px}
  .hero h1{font-size:clamp(42px,13.3vw,52px);line-height:1.05}

@@ -8,14 +8,28 @@ const homeLink = (hash: string) => home ? hash : `/${hash}`;
 <header class="site-header" id="top">
   <button class="menu-button" type="button" aria-label="Otevřít menu" aria-expanded="false" aria-controls="site-menu"><span class="menu-icon" aria-hidden="true"><span></span><span></span><span></span></span><span class="menu-label">MENU</span></button>
   <a class="brand" href={home ? '#top' : '/'}>Penzion u Rechů</a>
-  <a class="header-book" href={home ? bookingUrl : '#rezervace'}>{home ? 'OVĚŘIT DOSTUPNOST' : 'REZERVOVAT'} <span aria-hidden="true">↗</span></a>
+  <a class="header-book" href={home ? bookingUrl : '#rezervace'}>{home ? 'OVĚŘIT DOSTUPNOST' : 'REZERVOVAT'} <span aria-hidden="true"></span></a>
   <nav class="site-menu" id="site-menu" aria-label="Hlavní navigace" aria-hidden="true" inert><div class="site-menu-inner">
     <div class="site-menu-column"><h2>Pobyt</h2><a href={homeLink('#pokoje')}>Pokoje a apartmány</a><a href="https://penzionrech.cz/pobytove-balicky/">Pobytové balíčky</a><a href="https://penzionrech.cz/cenik/">Ceník</a><a href="https://penzionrech.cz/fotogalerie/">Galerie</a><a href={home ? bookingUrl : '#rezervace'}>Rezervace</a></div>
     <div class="site-menu-column"><h2>Wellness</h2><a href={homeLink('#wellness')}>Soukromé wellness</a><a href={homeLink('#pokoje')}>Apartmány s wellness</a><a href="https://penzionrech.cz/mini-lazne/">Masáže</a></div>
     <div class="site-menu-column"><h2>O nás</h2><a href={home ? '#jidlo' : '#stravovani'}>All inclusive light</a><a href={homeLink('#okoli')}>Zahrada a okolí</a><a href="https://penzionrech.cz/fotogalerie/">Fotogalerie</a></div>
     <div class="site-menu-column"><h2>Pro hosty</h2><a href="https://penzionrech.cz/darkovy-poukaz/">Dárkové poukazy</a><a href={home ? 'https://penzionrech.cz/informace/' : '#informace'}>Informace k pobytu</a><a href="#kontakt">Kontakt</a></div>
     <div class="site-menu-column site-menu-contact"><h2>Napište nám</h2><a href="tel:+420777132343">+420 777 13 23 43</a><a href="mailto:recepce@penzionrech.cz">recepce@penzionrech.cz</a><span>Hořická 2024/42, Blansko</span></div>
-  </div></nav>
+    <div class="mobile-menu-content">
+      <div class="mobile-menu-groups">
+        <a href={homeLink('#pokoje')}>Pokoje a apartm&#225;ny <span aria-hidden="true"></span></a>
+        <a href="https://penzionrech.cz/pobytove-balicky/">Pobytov&#233; bal&#237;&#269;ky <span aria-hidden="true"></span></a>
+        <a href={homeLink('#wellness')}>Wellness <span aria-hidden="true"></span></a>
+        <a href={homeLink('#okoli')}>Za&#382;ijte Rech <span aria-hidden="true"></span></a>
+        <a href={home ? 'https://penzionrech.cz/informace/' : '#informace'}>Pro hosty <span aria-hidden="true"></span></a>
+      </div>
+      <div class="mobile-menu-utility">
+        <a href="https://penzionrech.cz/cenik/">Cen&#237;k</a>
+        <a href="https://penzionrech.cz/darkovy-poukaz/">D&#225;rkov&#233; poukazy</a>
+        <a href="#kontakt">Kontakt</a>
+      </div>
+      <div class="mobile-menu-contact"><a href="tel:+420777132343">+420 777 13 23 43</a><a href="mailto:recepce@penzionrech.cz">recepce@penzionrech.cz</a></div>
+    </div>`r`n  </div></nav>
 </header>
 <script>
   const button = document.querySelector<HTMLButtonElement>('.menu-button');
