@@ -8,7 +8,7 @@ const homeLink = (hash: string) => home ? hash : `/${hash}`;
 <header class="site-header" id="top">
   <button class="menu-button" type="button" aria-label="Otevřít menu" aria-expanded="false" aria-controls="site-menu"><span class="menu-icon" aria-hidden="true"><span></span><span></span><span></span></span><span class="menu-label">MENU</span></button>
   <a class="brand" href={home ? '#top' : '/'}>Penzion u Rechů</a>
-  <a class="header-book" href={home ? bookingUrl : '#rezervace'}>{home ? 'OVĚŘIT DOSTUPNOST' : 'REZERVOVAT'} <span aria-hidden="true"></span></a>
+  <a class="header-book" href={home ? bookingUrl : '#rezervace'}>{home ? 'OVĚŘIT DOSTUPNOST' : 'REZERVOVAT'} <span aria-hidden="true">↗</span></a>
   <nav class="site-menu" id="site-menu" aria-label="Hlavní navigace" aria-hidden="true" inert><div class="site-menu-inner">
     <div class="site-menu-column"><h2>Pobyt</h2><a href={homeLink('#pokoje')}>Pokoje a apartmány</a><a href="https://penzionrech.cz/pobytove-balicky/">Pobytové balíčky</a><a href="https://penzionrech.cz/cenik/">Ceník</a><a href="https://penzionrech.cz/fotogalerie/">Galerie</a><a href={home ? bookingUrl : '#rezervace'}>Rezervace</a></div>
     <div class="site-menu-column"><h2>Wellness</h2><a href={homeLink('#wellness')}>Soukromé wellness</a><a href={homeLink('#pokoje')}>Apartmány s wellness</a><a href="https://penzionrech.cz/mini-lazne/">Masáže</a></div>
@@ -17,19 +17,14 @@ const homeLink = (hash: string) => home ? hash : `/${hash}`;
     <div class="site-menu-column site-menu-contact"><h2>Napište nám</h2><a href="tel:+420777132343">+420 777 13 23 43</a><a href="mailto:recepce@penzionrech.cz">recepce@penzionrech.cz</a><span>Hořická 2024/42, Blansko</span></div>
     <div class="mobile-menu-content">
       <div class="mobile-menu-groups">
-        <a href={homeLink('#pokoje')}>Pokoje a apartm&#225;ny <span aria-hidden="true"></span></a>
-        <a href="https://penzionrech.cz/pobytove-balicky/">Pobytov&#233; bal&#237;&#269;ky <span aria-hidden="true"></span></a>
-        <a href={homeLink('#wellness')}>Wellness <span aria-hidden="true"></span></a>
-        <a href={homeLink('#okoli')}>Za&#382;ijte Rech <span aria-hidden="true"></span></a>
-        <a href={home ? 'https://penzionrech.cz/informace/' : '#informace'}>Pro hosty <span aria-hidden="true"></span></a>
+        <section class="mobile-menu-group"><button type="button" aria-expanded="false" aria-controls="mobile-stay">Pobyt <span aria-hidden="true"></span></button><div class="mobile-menu-links" id="mobile-stay" hidden><a href={homeLink('#pokoje')}>Pokoje a apartm&#225;ny</a><a href="https://penzionrech.cz/pobytove-balicky/">Pobytov&#233; bal&#237;&#269;ky</a><a href="https://penzionrech.cz/cenik/">Cen&#237;k</a><a href="https://penzionrech.cz/fotogalerie/">Galerie</a><a href={home ? bookingUrl : '#rezervace'}>Rezervace</a></div></section>
+        <section class="mobile-menu-group"><button type="button" aria-expanded="false" aria-controls="mobile-wellness">Wellness <span aria-hidden="true"></span></button><div class="mobile-menu-links" id="mobile-wellness" hidden><a href={homeLink('#wellness')}>Soukrom&#233; wellness</a><a href={homeLink('#pokoje')}>Apartm&#225;ny s wellness</a><a href="https://penzionrech.cz/mini-lazne/">Mas&#225;&#382;e</a></div></section>
+        <section class="mobile-menu-group"><button type="button" aria-expanded="false" aria-controls="mobile-about">O n&#225;s <span aria-hidden="true"></span></button><div class="mobile-menu-links" id="mobile-about" hidden><a href={home ? '#jidlo' : '#stravovani'}>All inclusive light</a><a href={homeLink('#okoli')}>Zahrada a okol&#237;</a><a href="https://penzionrech.cz/fotogalerie/">Fotogalerie</a></div></section>
+        <section class="mobile-menu-group"><button type="button" aria-expanded="false" aria-controls="mobile-guests">Pro hosty <span aria-hidden="true"></span></button><div class="mobile-menu-links" id="mobile-guests" hidden><a href="https://penzionrech.cz/darkovy-poukaz/">D&#225;rkov&#233; poukazy</a><a href={home ? 'https://penzionrech.cz/informace/' : '#informace'}>Informace k pobytu</a><a href="#kontakt">Kontakt</a></div></section>
+        <section class="mobile-menu-group"><button type="button" aria-expanded="false" aria-controls="mobile-contact">Napi&#353;te n&#225;m <span aria-hidden="true"></span></button><div class="mobile-menu-links" id="mobile-contact" hidden><a href="tel:+420777132343">+420 777 13 23 43</a><a href="mailto:recepce@penzionrech.cz">recepce@penzionrech.cz</a></div></section>
       </div>
-      <div class="mobile-menu-utility">
-        <a href="https://penzionrech.cz/cenik/">Cen&#237;k</a>
-        <a href="https://penzionrech.cz/darkovy-poukaz/">D&#225;rkov&#233; poukazy</a>
-        <a href="#kontakt">Kontakt</a>
-      </div>
-      <div class="mobile-menu-contact"><a href="tel:+420777132343">+420 777 13 23 43</a><a href="mailto:recepce@penzionrech.cz">recepce@penzionrech.cz</a></div>
-    </div>`r`n  </div></nav>
+    </div>
+  </div></nav>
 </header>
 <script>
   const button = document.querySelector<HTMLButtonElement>('.menu-button');
@@ -45,8 +40,11 @@ const homeLink = (hash: string) => home ? hash : `/${hash}`;
       }
     });
     const setOpen = (open: boolean) => {
-      if (open) {
-        pageScrollY = window.scrollY;
+      const expandedForShortViewport = window.matchMedia('(min-width: 701px) and (max-height: 760px)').matches;
+      document.documentElement.classList.toggle('menu-tall', open && expandedForShortViewport);
+      document.body.classList.toggle('menu-tall', open && expandedForShortViewport);
+      if (open) pageScrollY = window.scrollY;
+      if (open && !expandedForShortViewport) {
         document.body.style.setProperty('--page-scroll-lock-top', `${-pageScrollY}px`);
       } else {
         document.body.style.removeProperty('--page-scroll-lock-top');
@@ -65,6 +63,14 @@ const homeLink = (hash: string) => home ? hash : `/${hash}`;
     };
     button.addEventListener('click', () => setOpen(button.getAttribute('aria-expanded') !== 'true'));
     menu.querySelectorAll('a').forEach(link => link.addEventListener('click', () => setOpen(false)));
+    menu.querySelectorAll<HTMLButtonElement>('.mobile-menu-group > button').forEach(disclosure => {
+      disclosure.addEventListener('click', () => {
+        const expanded = disclosure.getAttribute('aria-expanded') === 'true';
+        disclosure.setAttribute('aria-expanded', String(!expanded));
+        const panel = document.getElementById(disclosure.getAttribute('aria-controls') || '');
+        if (panel) panel.hidden = expanded;
+      });
+    });
     document.addEventListener('keydown', event => {
       if (event.key === 'Escape' && button.getAttribute('aria-expanded') === 'true') { setOpen(false); button.focus(); }
     });

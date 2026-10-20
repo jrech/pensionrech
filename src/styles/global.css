@@ -30,9 +30,9 @@ h1,h2{font-weight:400;letter-spacing:-.025em}
 .section-wrap{max-width:1440px;margin-inline:auto;padding-inline:80px}
 .site-header{--header-inset:max(48px,calc(50% - 672px));position:absolute;z-index:10;inset:0 0 auto;height:120px;display:flex;align-items:flex-start;justify-content:center;padding:35px var(--header-inset);color:var(--ivory)}
 .site-header>.menu-button,.site-header>.brand,.site-header>.header-book{z-index:2}
-.menu-button,.header-book{height:50px;border:0;background:var(--ivory);color:var(--ink);display:flex;align-items:center;justify-content:space-between;gap:20px;padding:0 24px;font-size:12px;letter-spacing:.09em;font-weight:500}
+.menu-button,.header-book{height:50px;border:0;background:var(--ivory);color:var(--ink);display:flex;align-items:center;justify-content:center;gap:20px;padding:0 24px;font-size:12px;letter-spacing:.09em;font-weight:500}
 .menu-button{position:absolute;left:var(--header-inset);top:35px;min-width:118px}
-.header-book{position:absolute;right:var(--header-inset);top:35px;min-width:173px}
+.header-book{position:absolute;right:var(--header-inset);top:35px;min-width:173px;justify-content:space-between}
 .header-book span,.light-button span,.button span,.outline-button span,.all-rooms span{font-size:21px;line-height:0;font-weight:400}
 .brand{font-size:24px;font-weight:600;line-height:50px}
 .menu-icon{position:relative;width:15px;height:16px;flex:none}
@@ -223,6 +223,12 @@ h1,h2{font-weight:400;letter-spacing:-.025em}
  .site-menu-column h2{font-size:22px}
  .site-menu-column a,.site-menu-column>span{font-size:14px}
 }
+@media(min-width:701px) and (max-height:760px){
+ html.menu-active.menu-tall,body.menu-active.menu-tall{overflow:visible;overscroll-behavior:auto}
+ body.menu-active.menu-tall{position:static;top:auto;width:auto}
+ .site-menu{position:absolute;height:auto;min-height:0}
+ .site-menu-inner{height:auto;overflow:visible}
+}
 @media(max-width:700px){
  :root{--section-space:clamp(68px,18vw,80px)}
  .section-wrap{padding-inline:24px}
@@ -237,11 +243,11 @@ h1,h2{font-weight:400;letter-spacing:-.025em}
  .site-menu-column{display:none}
  .mobile-menu-content{display:block}
  .mobile-menu-groups{display:flex;flex-direction:column}
- .mobile-menu-groups a{min-height:54px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #c9c2b5;font-size:20px;line-height:1.2;letter-spacing:-.025em}
- .mobile-menu-groups a span{width:7px;height:7px;border-right:1px solid currentColor;border-bottom:1px solid currentColor;transform:rotate(45deg) translateY(-2px)}
- .mobile-menu-utility{display:flex;flex-direction:column;align-items:flex-start;gap:0;padding-top:20px}
- .mobile-menu-utility a,.mobile-menu-contact a{font-size:12px;line-height:1.4;padding:7px 0}
- .mobile-menu-contact{display:flex;flex-direction:column;align-items:flex-start;margin-top:16px}
+ .mobile-menu-group>button{width:100%;min-height:54px;display:flex;align-items:center;justify-content:space-between;padding:0;background:none;border:0;border-bottom:1px solid #c9c2b5;color:inherit;text-align:left;font:inherit;font-size:20px;line-height:1.2;letter-spacing:-.025em;cursor:pointer}
+ .mobile-menu-group>button span{width:7px;height:7px;border-right:1px solid currentColor;border-bottom:1px solid currentColor;transform:rotate(45deg) translateY(-2px);transition:transform .2s ease}
+ .mobile-menu-group>button[aria-expanded="true"] span{transform:rotate(225deg) translate(-2px,-1px)}
+ .mobile-menu-links:not([hidden]){display:flex;flex-direction:column;align-items:flex-start;padding:8px 0 14px 12px;border-bottom:1px solid #c9c2b5}
+ .mobile-menu-links a{font-size:14px;line-height:1.4;padding:7px 0}
  .hero{height:100vh;background-position:53% center}
  .hero-inner{left:24px;right:24px;bottom:42px}
  .hero h1{font-size:clamp(42px,13.3vw,52px);line-height:1.05}
